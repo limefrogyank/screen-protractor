@@ -21,6 +21,7 @@ const styles = css`
 div{
     position: absolute;
     border-radius: 350px 350px 0px 0px;
+    touch-action:none;
 }
 canvas {    
     border-radius: 350px 350px 0px 0px;
@@ -31,7 +32,7 @@ canvas {
 export class Protractor extends FASTElement {
     
     @attr top: number = 0;
-    @attr left: number= 0;
+    @attr left: number = 0;
 
     div!: HTMLDivElement;
     canvas!: HTMLCanvasElement;
@@ -64,6 +65,9 @@ export class Protractor extends FASTElement {
         if (ctx != null) {
             createDrawing(ctx);
         }
+
+        this.x = this.left;
+        this.y = this.top;
 
         this.div.addEventListener('keydown', this.divKeydown.bind(this),false);
 
@@ -141,6 +145,7 @@ export class Protractor extends FASTElement {
         this.isScaling = true;
         this.scaleStartPoint = [e.clientX, e.clientY];
         this.oldScale = this.scale;
+        
 
         window.addEventListener('pointermove', this.moveScaleHandle, false);
         window.addEventListener('pointerup', this.upScaleHandle, false);
@@ -191,6 +196,7 @@ export class Protractor extends FASTElement {
         const centerY = 30;
         const inside = Math.pow(x - centerAndRadius, 2) + Math.pow(y - centerY, 2) < Math.pow(centerAndRadius, 2);
         if (inside) {
+            
             this.pointerIds.push(e.pointerId);
             //this.div.setPointerCapture(e.pointerId);
 
