@@ -3,6 +3,7 @@ import { RoundButton } from './roundButton';
 export declare class Protractor extends FASTElement {
     top: number;
     left: number;
+    scale: number;
     div: HTMLDivElement;
     canvas: HTMLCanvasElement;
     rotateButton: RoundButton;
@@ -22,7 +23,6 @@ export declare class Protractor extends FASTElement {
     x: number;
     y: number;
     rotate: number;
-    scale: number;
     connectedCallback(): void;
     divKeydown(e: KeyboardEvent): void;
     rotateButtonKeydown(e: KeyboardEvent): void;

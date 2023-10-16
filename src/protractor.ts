@@ -33,6 +33,7 @@ export class Protractor extends FASTElement {
     
     @attr top: number = 0;
     @attr left: number = 0;
+    @attr scale: number=1;
 
     div!: HTMLDivElement;
     canvas!: HTMLCanvasElement;
@@ -57,7 +58,7 @@ export class Protractor extends FASTElement {
     @observable x: number = 0;
     @observable y: number = 0;
     @observable rotate: number = 0;
-    @observable scale: number = 1;
+    //@observable scale: number = 1;
 
     connectedCallback(): void {
         super.connectedCallback();
@@ -144,9 +145,8 @@ export class Protractor extends FASTElement {
     scaleButtonDown(e:PointerEvent){
         this.isScaling = true;
         this.scaleStartPoint = [e.clientX, e.clientY];
-        this.oldScale = this.scale;
+        this.oldScale = +this.scale; //force it to be a number, sometimes treated as string
         
-
         window.addEventListener('pointermove', this.moveScaleHandle, false);
         window.addEventListener('pointerup', this.upScaleHandle, false);
     }
@@ -154,7 +154,7 @@ export class Protractor extends FASTElement {
     scaleButtonMove(e: PointerEvent) {
         if (this.isScaling) {
             const change = Math.max((e.clientX - this.scaleStartPoint[0])/this.canvas.width, (e.clientY - this.scaleStartPoint[1])/this.canvas.height);
-            this.scale = this.oldScale + change;
+            this.scale = +(this.oldScale + change);
         }
     }
 

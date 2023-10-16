@@ -2,11 +2,12 @@ import { FASTElement, customElement, attr, html, ref, css, observable } from '@m
 
 import type { ViewTemplate } from '@microsoft/fast-element';
 import { Protractor } from './protractor';
+import { Button } from '@microsoft/fast-components';
 
 const template: ViewTemplate<ProtractorButton> = html<ProtractorButton>`
-    <fluent-button @click="${x => x.clicked()}" appearance="${x=>x.accent ? 'accent' : 'neutral'}">Toggle Protractor</fluent-button>
+    <fluent-button ${ref("button")} @click="${x => x.clicked()}" appearance="${x=>x.accent ? 'accent' : 'neutral'}">Toggle Protractor</fluent-button>
     
-    <screen-protractor style="display: ${x=>x.showProtractor ? 'block' : 'none'}" ${ref('protractor')}></screen-protractor>
+    <screen-protractor scale="${x=>x.scale}" style="display: ${x=>x.showProtractor ? 'block' : 'none'}" ${ref('protractor')}></screen-protractor>
 `;
 
 
@@ -15,10 +16,12 @@ const template: ViewTemplate<ProtractorButton> = html<ProtractorButton>`
 export class ProtractorButton extends FASTElement {
 
     @attr accent:boolean = false;
+    @attr scale:number = 1.0;
 
     @observable showProtractor:boolean = false;
 
     protractor!: Protractor;
+    button!: Button;
 
     connectedCallback(): void {
         super.connectedCallback();
@@ -27,8 +30,9 @@ export class ProtractorButton extends FASTElement {
 
     clicked(){
         this.showProtractor = !this.showProtractor;
-        this.protractor.x = 0;
-        this.protractor.y = 0;
+        console.log(this.button);
+        this.protractor.x = this.button.offsetLeft;
+        this.protractor.y = this.button.offsetTop;
     }
 
 
