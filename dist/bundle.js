@@ -510,7 +510,13 @@
             style="position:absolute; bottom: -10px; right: -10px;" ${Lt("scaleButton")}>${ss()}</fluent-button> 
     </div>
 `,us=Xt`
-div{
+:host{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:99999;
+}
+div {
     position: absolute;
     border-radius: 350px 350px 0px 0px;
     touch-action:none;

@@ -11,7 +11,8 @@ module.exports = function (env, { mode }) {
     },
     output: {
       filename: 'bundle.js',
-      publicPath: '/'
+      publicPath: '/',
+      clean:true
     },
     resolve: {
       extensions: ['.ts', '.js', '.svg'],
@@ -28,9 +29,9 @@ module.exports = function (env, { mode }) {
         directory: path.join(__dirname, './')
       }
     },
-    plugins: [
-      new CleanWebpackPlugin()
-    ],
+    // plugins: [
+    //   new CleanWebpackPlugin()
+    // ],
     module: {
       rules: [
         {

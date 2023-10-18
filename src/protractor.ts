@@ -18,7 +18,13 @@ const template: ViewTemplate<Protractor> = html<Protractor>`
 `;
 
 const styles = css`
-div{
+:host{
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:99999;
+}
+div {
     position: absolute;
     border-radius: 350px 350px 0px 0px;
     touch-action:none;
