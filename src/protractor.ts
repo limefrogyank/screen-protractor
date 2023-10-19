@@ -23,6 +23,7 @@ const styles = css`
     top:0;
     left:0;
     z-index:99999;
+
 }
 div {
     position: absolute;
@@ -236,7 +237,7 @@ export class Protractor extends FASTElement {
     }
 
     mouseWheel(e: WheelEvent) {
-
+        e.preventDefault();
         console.log(e.deltaX);
         const scaleDelta = 0.02
         const scaleDir = Math.sign(e.deltaY);
